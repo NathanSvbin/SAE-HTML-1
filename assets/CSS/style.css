@@ -112,7 +112,6 @@ label {
     justify-content: center;   
     position: relative;
     padding: 1rem;
-    height: 5%;
 }
 
 .title-box h2 {
@@ -332,4 +331,5 @@ footer {
     }
 
 }
+
 
