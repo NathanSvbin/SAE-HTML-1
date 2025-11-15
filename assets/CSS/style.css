@@ -177,7 +177,6 @@ label {
     background-color: #1F3A5F;
     color: white;
     margin: 0 auto;
-    justify-items: center;
     font-family: 'Oswald';
     font-size: 1vw;
     width: auto;
@@ -333,3 +332,4 @@ footer {
     }
 
 }
+
