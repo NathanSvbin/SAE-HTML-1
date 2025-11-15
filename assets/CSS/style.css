@@ -112,6 +112,7 @@ label {
     justify-content: center;   
     position: relative;
     padding: 1rem;
+    height: 5%;
 }
 
 .title-box h2 {
@@ -176,6 +177,7 @@ label {
     background-color: #1F3A5F;
     color: white;
     margin: 0 auto;
+    justify-items: center;
     font-family: 'Oswald';
     font-size: 1vw;
     width: auto;
@@ -243,6 +245,7 @@ footer {
     line-height: 10vh;
     font-family: "Workbench", cursive;
 }
+
 
 @media screen and (max-width: 1300px) {
 
@@ -330,4 +333,3 @@ footer {
     }
 
 }
-
