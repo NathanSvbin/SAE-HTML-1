@@ -41,6 +41,7 @@
                 <h3>Requêtes écologiques :</h3>
                 <p class="paragraphe">Pour améliorer la vision écologique de KDou nous avons trouvés 4 requêtes intéressantes :</p>
 
+                <p class="paragraphe">Pour la 1ère requête écologique nous avons décidé de lister tous les produits Hors UE et en UE pour voir les différences sur l'emprunte carbonne par rapport au produit</p>
                 <div class="code">
                     <p>
                         <span>SELECT </span>Fournisseur.NoPays, Produit.NoFour, Produit.NomProd <br>
@@ -50,12 +51,26 @@
                         <span>ORDER BY </span>1,3;
                     </p>
                 </div>
-                <p class="paragraphe">Pour la 1ère requête écologique nous avons décidé de regarder qu'elles étaient les produits qui n'avaient jamais été commandés. Si un produit n'est pas commandé autant arrêter la production ce qui évitera de gaspillage et la main d'ouvre inutile. Ce qui permet finalement d'avoir une meilleure empreinte écologique et économiser de l'argent.​</p>
+                <p class="paragraphe">Pour la 2ème requête écologique nous avons décidé de regarder qu'elles étaient les produits qui n'avaient jamais été commandés. Si un produit n'est pas commandé autant arrêter la production ce qui évitera de gaspillage et la main d'ouvre inutile. Ce qui permet finalement d'avoir une meilleure empreinte écologique et économiser de l'argent.​</p>
                 <div class="code"><p>
                     <span>SELECT DISTINCT </span>Produit.NomProd, Produit.CodeCateg, Produit.RefProd, DetailCommande.RefProd, DetailCommande.Numcommande <br>
                     <span>FROM </span>Produit <span>LEFT JOIN </span>DetailCommande <br>
                     <span>ON </span>Produit.RefProd = DetailCommande.RefProd​ <br>
                     <span>WHERE </span>(((DetailCommande.Numcommande) Is Null));​<br></p>         
+                </div>
+                
+                <p class="paragraphe">Cette requête renvoie, pour chaque valeur du champ UE (“Membre” ou “Hors”), le chiffre d’affaires correspondant. Elle permet donc de comparer la part du CA réalisée avec des fournisseurs de l’Union Européenne et celle réalisée avec des fournisseurs hors UE.​</p>
+                <p class="paragraphe">Si une grande partie du chiffre d’affaires provient de pays hors UE, KDou pourrait réduire son impact environnemental en augmentant progressivement la part de fournisseurs situés dans l’UE, donc plus proches géographiquement.</p>
+
+                <div class="code">
+                    <p>
+                        <span>SELECT </span>pa.UE, Sum(d.[Quantite] * p.CoutAchat * c.CoefMarge * (1 - d.[Remise (%)]/100)) <span>AS </span> CA_Ecologique <br>
+                        <span>FROM </span>((((DetailCommande <span>AS </span> d <span>INNER JOIN </span>Produit <span>AS </span> p 
+                        <span>ON </span>d.[Ref produit] = p.RefProd) <span>INNER JOIN </span>Categorie AS c <span>ON </span>p.CodeCateg = c.CodeCateg) <br>
+                        <span>INNER JOIN </span>Fournisseur <span>AS </span> f 
+                        <span>ON </span>p.NoFour = f.NoFour) <span>INNER JOIN </span>Pays <span>AS </span> pa <span>ON </span>f.NoPays = pa.NoPays) <br>
+                        <span>GROUP BY </span>pa.UE;
+                    </p>
                 </div>
                 <p class="paragraphe">Il serait aussi interessant de voir les couples clients pour faire des livraisons groupés. Cela permmettrait de reduire les emission de CO2 des ventes.​</p>
                 <div class="code">
@@ -69,6 +84,8 @@
                         <span>AND </span>Com2.NbCommandes > 0;
                     </p>
                 </div>
+                <p class="paragraphe">La mission 3 montre que la base de données de KDou peut être utilisée pour produire des indicateurs concrets et variés : performance des desserts et boissons, poids des pays hors UE dans le chiffre d’affaires, fonctionnement des réseaux de clients pilotes/partenaires, rotation des produits et risques de rupture. </p>
+                <p class="paragraphe">Ces analyses constituent une première base de tableau de bord pour l’entreprise. Elles aident KDou à mieux piloter sa stratégie commerciale et logistique, et à aligner ses décisions avec son objectif de se positionner comme une entreprise plus éco-responsable.</p>
 
             </section>
         </div>
