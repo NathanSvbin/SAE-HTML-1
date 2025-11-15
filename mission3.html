@@ -32,10 +32,43 @@
         <div class="content">
             <section class="box">
                 <div class="title-box">
-                    <h2>Partie 1</h2>
+                    <h2>Mission 3</h2>
                     <img src="assets/IMG/sql.png"  width="50%" height="25%" alt="SQL icon">
                 </div>
+                <h3>Contexte :</h3>
+                <p class="paragraphe">La base est dans une nouvelle version suite à l’intégration d’évolution devant améliorer son exploitation</p>
+                <p class="paragraphe">KDou a mis en relation des clients ayant une proximité afin d’optimiser les opérations de livraison. Certains clients pilotent un réseau de clients partenaires pour faire des livraisons groupées.</p>
+                <h3>Requêtes écologiques :</h3>
+                <p class="paragraphe">Pour améliorer la vision écologique de KDou nous avons trouvés 4 requêtes intéressantes :</p>
 
+                <div class="code">
+                    <p>
+                        <span>SELECT </span>Fournisseur.NoPays, Produit.NoFour, Produit.NomProd <br>
+                        <span>FROM </span>(Pays <span>INNER JOIN </span>Fournisseur <span>ON </span>Pays.NoPays = Fournisseur.NoPays) <br>
+                        <span>INNER JOIN </span>Produit <span>ON </span>Fournisseur.NoFour = Produit.NoFour <br>
+                        <span>WHERE </span>(((Pays.UE)="Hors")) <br>
+                        <span>ORDER BY </span>1,3;
+                    </p>
+                </div>
+                <p class="paragraphe">Pour la 1ère requête écologique nous avons décidé de regarder qu'elles étaient les produits qui n'avaient jamais été commandés. Si un produit n'est pas commandé autant arrêter la production ce qui évitera de gaspillage et la main d'ouvre inutile. Ce qui permet finalement d'avoir une meilleure empreinte écologique et économiser de l'argent.​</p>
+                <div class="code"><p>
+                    <span>SELECT DISTINCT </span>Produit.NomProd, Produit.CodeCateg, Produit.RefProd, DetailCommande.RefProd, DetailCommande.Numcommande <br>
+                    <span>FROM </span>Produit <span>LEFT JOIN </span>DetailCommande <br>
+                    <span>ON </span>Produit.RefProd = DetailCommande.RefProd​ <br>
+                    <span>WHERE </span>(((DetailCommande.Numcommande) Is Null));​<br></p>         
+                </div>
+                <p class="paragraphe">Il serait aussi interessant de voir les couples clients pour faire des livraisons groupés. Cela permmettrait de reduire les emission de CO2 des ventes.​</p>
+                <div class="code">
+                    <p>
+                        <span>SELECT </span>C1.Contact <span>AS </span>Client, C1.Ville <span>AS </span>Ville1, C2.Contact <span>AS </span>Partenaire, C2.Ville <span>AS </span>Ville2, Com1.NbCommandes <span>AS </span>NbCommandesClient, Com2.NbCommandes <span>AS </span>NbCommandesPartenaire <br>
+                        <span>FROM </span>((Clientele <span>AS </span>C1 <span>INNER JOIN </span>Clientele <span>AS </span>C2 <span>ON </span>C1.CodeCliPart = C2.CodeCli) <br>
+                        <span>LEFT JOIN </span>(SELECT CodeCli, COUNT([N° commande]) <span>AS </span>NbCommandes <span>FROM </span>Commande <span>GROUP BY </span>CodeCli) <span>AS </span>Com1 <span>ON </span>C1.CodeCli = Com1.CodeCli) <br>
+                        <span>LEFT JOIN </span>(SELECT CodeCli, COUNT([N° commande]) <span>AS </span>NbCommandes <span>FROM </span>Commande <span>GROUP BY </span>CodeCli) <span>AS </span>Com2 <span>ON </span>C2.CodeCli = Com2.CodeCli <br>
+                        <span>WHERE </span>C1.Ville = C2.Ville <br>
+                        <span>AND </span>Com1.NbCommandes > 0 <br>
+                        <span>AND </span>Com2.NbCommandes > 0;
+                    </p>
+                </div>
 
             </section>
         </div>
