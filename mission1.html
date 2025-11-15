@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/CSS" href="assets/CSS/style.css">
+        <link rel="icon" type="image/png" href="assets/IMG/sql.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <header>
+            <h1><a class="titre" href="index.html">Notre Site</a></h1>
+            <nav>
+
+                <input type="checkbox" id="toggle-menu" class="toggle-menu">
+                <label for="toggle-menu">
+                    <img class="menu-burger" src="assets/IMG/menu-burger.png" width="85%" height="70%" alt="Menu Burger">
+                </label>    
+
+                <ul class="navbar">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="introduction.html">Introduction</a></li>
+                    <li><a href="mission1.html">Mission 1</a></li>
+                    <li><a href="mission2.html">Mission 2</a></li>
+                    <li><a href="mission3.html">Mission 3</a></li>
+                    <li><a href="conclusion.html">Conclusion</a></li>
+                </ul>
+                   
+            </nav>
+        </header>
+
+        <div class="content">
+            <section class="box">
+                <div class="title-box">
+                    <h2>Mission 1</h2>
+                    <img src="assets/IMG/sql.png"  width="50%" height="25%" alt="SQL icon">
+                </div>
+                <h3>Contexte :</h3>
+                <p class="paragraphe">Kdou vend différent produits tels que les boisson dessert et travail avec plusieurs fournisseurs et clients. Cette mission consiste a étudier les données existantes pour vérifié leur cohérence avant de créer la base complète .</p>
+                <h3>Bilan étude :</h3>
+                <p class="paragraphe">La base contient les tables Fournisseur, Produit, Catégorie, Clientèle, Commande et DétailCommande. Les clés primaires et étrangères relient correctement les tables , mais certaines sont incorrectes.</p>
+                <h3>Exemples : </h3>
+                <p class="paragraphe">
+                    <ul class="liste">
+                        <li>5 clients à Paris, 2 à Besançon, 7 en Ile-de-France</li>
+                        <li>19 fournisseurs en Europe, 17 hors Europe</li>
+                        <li>Produits entre 100 € et 250 € : 6 articles (ex : Bratislava Vodka ,220 €)</li>
+                        <li>Commande n°10021 (Marie Lefèvre) —> plusieurs produits</li>
+                    </ul>
+                </p>
+                <h3>Problèmes constater : </h3>
+                <p class="paragraphe">
+                    <ol class="liste">
+                        <li>Dates incoherentes ( livraison avant commande)</li>
+                        <li>Champs vides ( couts, stock)</li>
+                        <li>Mauvaises catégories ( Catégorie 9 inexistante)</li>
+                        <li>Codes clients incorrect</li>
+                        <li>Doublons d’emails</li>
+                    </ol>
+                </p>
+                <h3>Améliorations : </h3>
+                <p class="paragraphe">
+                    <ol class="liste">
+                        <li>Controle des emails , code et champs obligatoire</li>
+                        <li>Corrigees les fausses données</li>
+                        <li>Éviter et donc empêcher la saisie d’erreur avec des information personnels</li>
+                        <li>Ajouter des contraintes :</li>
+                        <ul>
+                            <li>DateCommande < DateEnvoi < DateLivraison</li>
+                        </ul>
+                    </ol>
+                </p>
+                <h3>Conclusion : </h3>
+                <p class="paragraphe">La base Kdou est bien structurée mais contient des incohérences qui fausses donc la bases de données kdou. Ces corrections premettront d’obtenir une base plus cohérente est fiable pour les prochaines missions</p>
+
+
+
+
+            </section>
+        </div>
+
+        <footer>Merci pour la lecture</footer>
+
+
+    </body>
+</html>

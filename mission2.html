@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/CSS" href="assets/CSS/style.css">
+        <link rel="icon" type="image/png" href="assets/IMG/sql.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <header>
+            <h1><a class="titre" href="index.html">Notre Site</a></h1>
+            <nav>
+
+                <input type="checkbox" id="toggle-menu" class="toggle-menu">
+                <label for="toggle-menu">
+                    <img class="menu-burger" src="assets/IMG/menu-burger.png" width="85%" height="70%" alt="Menu Burger">
+                </label>    
+
+                <ul class="navbar">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="introduction.html">Introduction</a></li>
+                    <li><a href="mission1.html">Mission 1</a></li>
+                    <li><a href="mission2.html">Mission 2</a></li>
+                    <li><a href="mission3.html">Mission 3</a></li>
+                    <li><a href="conclusion.html">Conclusion</a></li>
+                </ul>
+                   
+            </nav>
+        </header>
+
+        <div class="content">
+            <section class="box">
+                <div class="title-box">
+                    <h2>Mission 2</h2>
+                    <img src="assets/IMG/sql.png"  width="50%" height="25%" alt="SQL icon">
+                </div>
+                <h3>Contexte :</h3>
+                <p class="paragraphe">L’objectif de cette mission est de commencer à exploiter la base de données de l’entreprise KDou pour pouvoir par la suite avoir des analyses et indicateurs pertinents.</p>
+                <h3>Introduction  : </h3>
+                <p class="paragraphe">L’objectif de cette étude SQL était d’explorer et d’interroger différentes tables d’une base de données commerciale afin de :</p>
+                <p class="paragraphe">
+                    <ul class="liste">
+                        <li>Comprendre les relations entre clients, commandes, fournisseurs, produits et catégories</li>
+                        <li>Réaliser des jointures</li>
+                        <li>Filtrer les données</li>
+                        <li>Identifier des cas particuliers (clients sans commande, fournisseurs sans produits…)</li>
+                    </ul>
+                </p>
+                <p class="paragraphe">Chaque question (A → M) avait pour but de manipuler SQL à travers des requêtes d’exploration, de filtrage ou de jointures</p>
+                <h3>Sources des données :</h3>
+                <p class="paragraphe">Les tables utilisées dans l'étude sont les suivantes :</p>
+                <p class="paragraphe">
+                    <ul class="liste">
+                        <li>Clientele</li>
+                        <li>Commande </li>
+                        <li>Fournisseur </li>
+                        <li>Produit </li>
+                        <li>Categorie </li>
+                    </ul>
+                </p>
+                <p class="paragraphe">Ces tables ont été mobilisées individuellement ou combinées via différentes jointures.</p>
+                <h3>Résultats :</h3>
+                <p class="paragraphe">Voici les principaux résultats obtenus parmi les questions A → M :</p>
+                <p class="paragraphe">
+                    <ol class="liste">
+                        <li>Clients sans commande (Question G)</li><br>
+                        <div class="code"><p><span>SELECT </span>c.CodeCli, c.Societe, c.MailCli<br>
+                            <span>FROM </span>Clientele <span>AS </span>c <span>LEFT JOIN </span>Commande <span>AS </span>cm <br>
+                            <span>ON </span>c.CodeCli = cm.CodeCli <br>
+                            <span>WHERE </span>cm.[N° commande] <span>IS NULL </span><br>
+                            <span>ORDER BY </span> 1;</p>
+                        </div>
+                        <p class="paragraphe">Grâce à un LEFT JOIN, nous avons identifié les clients n’ayant jamais passé de commande.</p>
+                        <table class="resultat-sql">
+                            <caption>
+                                Résultat question G
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Code client</th>
+                                    <th scope="col">Société</th>
+                                    <th scope="col">MailCli</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>DEAGE</td>
+                                    <td>Délices d'Agen</td>
+                                    <td>delicesdag@hotmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>KEVIN</td>
+                                    <td>Chez Kév</td>
+                                    <td>chezkev@hotmail.fr</td>
+                                </tr>
+                                <tr>
+                                    <td>MACHO</td>
+                                    <td>La maison Chou</td>
+                                    <td>lamaisonch@orange.fr</td>
+                                </tr>
+                                <tr>
+                                    <td>MAIPA</td>
+                                    <td>La Maison dans le Parc</td>
+                                    <td>lamaisonchev@orange</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <li>Fournisseurs sans produit (Question J & K)</li><br>
+                        <div class="code"><p>
+                            <span>SELECT </span>f.NoFour, f.Societe <br>
+                            <span>FROM </span>Fournisseur <span>AS </span>f <span>LEFT JOIN </span>Produit <span>AS </span>p<br>
+                            <span>ON </span>f.NoFour = p.NoFour <br>
+                            <span>WHERE </span>p.RefProd <span>IS NULL </span><br>
+                            <span>ORDER BY </span>1;<br></p>
+                        </div>
+                        <p class="paragraphe">Les LEFT JOIN ont permis de repérer les fournisseurs n’ayant aucun article enregistré dans la table Produit.</p>
+                        <table class="resultat-sql">
+                            <caption>
+                                Résultat question J
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">N° Fournisseur</th>
+                                    <th scope="col">Société</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>32</td>
+                                    <td>Sabor do Sul Ltda.</td>
+                                </tr>
+                                <tr>
+                                    <td>36</td>
+                                    <td>Pacific United Traders Ltd.</td>
+                                </tr>
+                                <tr>
+                                    <td>37</td>
+                                    <td>Ronde du lac</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <li>Catégories provenant des États-Unis (Question H)</li><br>
+                        <div class="code"><p>
+                            <span>SELECT DISTINCT </span>C.NomCateg <br>
+                            <span>FROM </span>(Categorie <span>AS </span>C <span>INNER JOIN </span>Produit <span>AS </span>P<br>
+                            <span>ON </span>C.CodeCateg = P.CodeCateg) <span>INNER JOIN </span> Fournisseur <span>AS </span>F<br>
+                            <span>ON </span>P.NoFour = F.NoFour <br>
+                            <span>WHERE </span>F.Pays = "Etats-Unis" <span>OR </span>F.Pays = "U.S.A." <br>
+                            <span>ORDER BY </span>1;<br></p>
+                        </div>
+                        <p class="paragraphe">La doubles jointures a permis d’extraire uniquement les catégories associées à des fournisseurs américains.</p>
+                        <table class="resultat-sql">
+                            <caption>
+                                Résultat question H
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nom catégorie</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Boissons</td>
+                                </tr>
+                                <tr>
+                                    <td>Condiments</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <li>Couples de clients situés à Paris (Question L)</li><br>
+                        <div class="code"><p></p>
+                            <span>SELECT </span>C1.CodeCli, C1.Societe, C1.MailCli, C2.CodeCli, C2.Societe, C2.MailCli<br>
+                            <span>FROM </span>Clientele <span>AS </span>C1 <span>INNER JOIN </span>Clientele <span>AS </span>C2 <br>
+                            <span>ON </span>C1.CodeCli > C2.CodeCli <br>
+                            <span>WHERE </span>C1.Ville = 'Paris" <span>AND </span>C2.Ville = 'Paris" <br>
+                            <span>ORDER BY </span>1, 4;<br></p>
+                        </div>
+                        <p class="paragraphe">Jointure sur la même table (auto-jointure).</p>
+                        <table class="resultat-sql">
+                            <caption>
+                                Résultat question L
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Code client</th>
+                                    <th scope="col">Société</th>
+                                    <th scope="col">C1.MailCli</th>
+                                    <th scope="col">Code client</th>
+                                    <th scope="col">Société</th>
+                                    <th scope="col">C2.MailCli</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FAMIA</td>
+                                    <td>ChefFamilla</td>
+                                    <td>cheffamill@gmail.com</td>
+                                    <td>ALYAD</td>
+                                    <td>Chez Bouxou</td>
+                                    <td>chezbouxou@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>FISSA</td>
+                                    <td>Une petite faim</td>
+                                    <td>unepetitef@orange.fr</td>
+                                    <td>ALYAD</td>
+                                    <td>Chez Bouxou</td>
+                                    <td>chezbouxou@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>FISSA</td>
+                                    <td>Une petite faim</td>
+                                    <td>unepetitef@orange.fr</td>
+                                    <td>FAMIA</td>
+                                    <td>ChefFamilla</td>
+                                    <td>cheffamill@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>GOUMA</td>
+                                    <td>Le Gourmet</td>
+                                    <td>contact@parisienne.fr</td>
+                                    <td>ALYAD</td>
+                                    <td>Chez Bouxou</td>
+                                    <td>chezbouxou@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>GOUMA</td>
+                                    <td>Le Gourmet</td>
+                                    <td>contact@parisienne.fr</td>
+                                    <td>FAMIA</td>
+                                    <td>ChefFamilla</td>
+                                    <td>cheffamill@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>GOUMA</td>
+                                    <td>Le Gourmet</td>
+                                    <td>contact@parisienne.fr</td>
+                                    <td>FISSA</td>
+                                    <td>Une petite faim</td>
+                                    <td>unepetitef@orange.fr</td>
+                                </tr>
+                                <tr>
+                                    <td>MALEF</td>
+                                    <td>La Parisienne</td>
+                                    <td>contact@parisienne.fr</td>
+                                    <td>ALYAD</td>
+                                    <td>Chez Bouxou</td>
+                                    <td>chezbouxou@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>MALEF</td>
+                                    <td>La Parisienne</td>
+                                    <td>contact@parisienne.fr</td>
+                                    <td>FAMIA</td>
+                                    <td>ChefFamilla</td>
+                                    <td>cheffamill@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>MALEF</td>
+                                    <td>La Parisienne</td>
+                                    <td>contact@parisienne.fr</td>
+                                    <td>FISSA</td>
+                                    <td>Une petite faim</td>
+                                    <td>unepetitef@orange.fr</td>
+                                </tr>
+                                <tr>
+                                    <td>MALEF</td>
+                                    <td>La Parisienne</td>
+                                    <td>contact@parisienne.fr</td>
+                                    <td>GOUMA</td>
+                                    <td>Le Gourmet</td>
+                                    <td>contact@parisienne.fr</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ol>
+                </p>
+                <p class="paragraphe">Ces résultats ont permis de mieux comprendre le contenu et la structure de la base.</p>
+                <h3>Conclusion :</h3>
+                <p class="paragraphe">
+                    <ul class="liste">
+                        <li>Comprendre les relations entre les tables de la base</li>
+                        <li>Manipuler différents types de jointures (INNER, LEFT) </li>
+                        <li>Filtrer et trier les données efficacement</li>
+                        <li>Analyser des cas particuliers comme les clients inactifs ou les fournisseurs sans produits</li>
+                        <li>Utiliser des requêtes textuelles et limites (TOP, LIKE, DISTINCT)</li>
+                    </ul>
+                </p>
+            </section>
+        </div>
+
+        <footer>Merci pour la lecture</footer>
+
+
+    </body>
+</html>
